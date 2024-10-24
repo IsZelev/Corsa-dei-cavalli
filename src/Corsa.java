@@ -1,38 +1,39 @@
-import java.util.Scanner;
+import java.util.ArrayList;
+
 
 public class Corsa
 {
-    public static void main(String[] args)
+    public int roadLength;
+    public ArrayList<ThreadCavallo> cavalli;
+
+    public Corsa(int rL, ArrayList<ThreadCavallo> c)
     {
-        try (Scanner input = new Scanner(System.in))
-        {
-            System.out.println("Inserire la lunghezza del percorso");
-            int roadLength = input.nextInt();
-            System.out.println("La lunghezza del percorso è " + roadLength + " metri");
-            input.nextLine();
-            System.out.println("Inserire il numero dei cavalli partecipanti");
-            int n = input.nextInt();
-            input.nextLine();
-            while(n > 0)
-            {
-                System.out.println("Inserire il nome del cavallo ");
-                String horseName = input.nextLine();
-                startRace(horseName, roadLength);
-                System.out.println(horseName + " partecipa alla gara \n");
-                n--;
-            }
-            
-        }
+        int roadLength = rL;
+        ArrayList<ThreadCavallo> cavalli = c;
     }
 
-    public static void startRace(String hn, int road)
+    public int getRoadLength()
     {
-        ThreadCavallo threadCavallo = new ThreadCavallo(hn);
-        Thread cavallo = new Thread(threadCavallo);
-        for (int i=0; i < road; i++)
+        return roadLength;
+    }
+
+    public ArrayList<ThreadCavallo> getCavalli()
+    {
+        return cavalli;
+    }
+
+    public void startCorsa()
+    {
+        for(ThreadCavallo cavallo : cavalli)
         {
-            System.out.println("Cavallo " + threadCavallo.getName() + " ha percorso " + i + " metri \n");
-            if(i == road) cavallo.interrupt();
+            cavallo.run();
+            try
+            {
+                cavallo.wait();
+            } catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
         }
     }
 }

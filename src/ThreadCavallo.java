@@ -1,10 +1,12 @@
 public class ThreadCavallo implements Runnable
 {
-    String name;
+    private String name;
+    private boolean last;
 
-    public ThreadCavallo(String n)
+    public ThreadCavallo(String n, boolean l)
     {
         name = n;
+        last = l;
     }
 
     public String getName()
@@ -12,13 +14,21 @@ public class ThreadCavallo implements Runnable
         return name;
     }
 
+    public boolean getLast()
+    {
+        return last;
+    }
+
+    @Override
     public void run()
     {
-        for(int i = 0; !Thread.interrupted(); i++)
-        {
-            System.out.println(this.getName() + " ha percorso " + i + " metri");
-        }
+        if(this.last)
+            notifyAll();
 
+        for(int i = 0; i > roadLength; i++)
+            System.out.println(this.getName() + " ha percorso " + i + " metri");
+        
         System.out.println("Il cavallo " + this.getName() + " è arrivato");
     }
+
 }
