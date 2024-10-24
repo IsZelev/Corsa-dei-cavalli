@@ -21,8 +21,9 @@ public class Corsa
         return cavalli;
     }
 
-    public void startCorsa()
+    public void startCorsa() throws InterruptedException
     {
+
         for(ThreadCavallo cavallo : cavalli)
         {
             Thread thread = new Thread(cavallo);
