@@ -8,10 +8,13 @@ public class Lobby
         try(Scanner input = new Scanner(System.in))
         {
             ArrayList<ThreadCavallo> cavalli = new ArrayList<ThreadCavallo>();
+            
             System.out.println("Inserire la lunghezza del percorso");
             int rL = input.nextInt();
+            
             System.out.println("La lunghezza del percorso è " + rL + " metri");
             input.nextLine();
+
             System.out.println("Inserire il numero dei cavalli partecipanti");
             int n = input.nextInt();
             input.nextLine();
@@ -21,13 +24,14 @@ public class Lobby
                 System.out.println("Inserire il nome del cavallo ");
                 String horseName = input.nextLine();
                 boolean last = (n == 1? true : false);
-                ThreadCavallo cavallo = new ThreadCavallo(horseName, last);
+                ThreadCavallo cavallo = new ThreadCavallo(rL, horseName, last);
                 cavalli.add(cavallo);
                 System.out.println(horseName + " partecipa alla gara \n");
                 n--;
             }
             Corsa corsa_cavalli = new Corsa(rL, cavalli);
+            corsa_cavalli.startCorsa();
         }
-        startCorsa();
+        
     }    
 }

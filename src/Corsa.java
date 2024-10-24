@@ -1,15 +1,14 @@
 import java.util.ArrayList;
 
-
 public class Corsa
 {
-    public int roadLength;
-    public ArrayList<ThreadCavallo> cavalli;
+    private int roadLength;
+    private ArrayList<ThreadCavallo> cavalli;
 
     public Corsa(int rL, ArrayList<ThreadCavallo> c)
     {
-        int roadLength = rL;
-        ArrayList<ThreadCavallo> cavalli = c;
+        roadLength = rL;
+        cavalli = c;
     }
 
     public int getRoadLength()
@@ -26,14 +25,8 @@ public class Corsa
     {
         for(ThreadCavallo cavallo : cavalli)
         {
-            cavallo.run();
-            try
-            {
-                cavallo.wait();
-            } catch (InterruptedException e)
-            {
-                e.printStackTrace();
-            }
+            Thread thread = new Thread(cavallo);
+            thread.start();
         }
     }
 }
