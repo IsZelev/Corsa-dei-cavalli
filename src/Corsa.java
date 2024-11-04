@@ -29,5 +29,13 @@ public class Corsa
             Thread thread = new Thread(cavallo);
             thread.start();
         }
+        try
+        {
+            for(ThreadCavallo cavallo : cavalli)
+            {
+                Thread thread = new Thread(cavallo);
+                thread.join();
+            }    
+        } catch(Exception e){}
     }
 }

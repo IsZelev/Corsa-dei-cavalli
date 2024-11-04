@@ -31,7 +31,10 @@ public class Lobby
             }
             Corsa corsa_cavalli = new Corsa(rL, cavalli);
             corsa_cavalli.startCorsa();
+            
+           
         }
         
     }    
 }
+//inserire il join prima della fine della gara su tutti i thread dei cavalli

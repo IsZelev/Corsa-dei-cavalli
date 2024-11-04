@@ -24,10 +24,6 @@ public class ThreadCavallo implements Runnable
     @Override
     public void run()
     {
-        if(this.last)
-        {
-            notifyAll();
-        }
         for(int i = 0; i <= this.roadLength; i++)
         {
             System.out.println(this.getName() + " ha percorso " + i + " metri");
