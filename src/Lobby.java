@@ -37,4 +37,3 @@ public class Lobby
         
     }    
 }
-//inserire il join prima della fine della gara su tutti i thread dei cavalli
