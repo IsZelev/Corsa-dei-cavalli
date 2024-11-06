@@ -36,6 +36,9 @@ public class Corsa
                 Thread thread = new Thread(cavallo);
                 thread.join();
             }    
+            System.out.println("La gara è terminata");
         } catch(Exception e){}
+
     }
+    
 }
