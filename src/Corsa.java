@@ -24,21 +24,20 @@ public class Corsa
     public void startCorsa() throws InterruptedException
     {
 
+        ArrayList<Thread> threadCavalli = new ArrayList<>(); 
         for(ThreadCavallo cavallo : cavalli)
         {
             Thread thread = new Thread(cavallo);
+            threadCavalli.add(thread);
             thread.start();
         }
         try
         {
-            for(ThreadCavallo cavallo : cavalli)
+            for(Thread thread : threadCavalli)
             {
-                Thread thread = new Thread(cavallo);
                 thread.join();
-            }    
+            }
             System.out.println("La gara è terminata");
         } catch(Exception e){}
-
     }
-    
 }

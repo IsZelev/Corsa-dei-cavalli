@@ -23,17 +23,18 @@ public class Lobby
             {
                 System.out.println("Inserire il nome del cavallo ");
                 String horseName = input.nextLine();
+                System.out.println("Inserire la velocità del cavallo in metri al secondo");
+                int ms = input.nextInt();
+                input.nextLine();
+
                 boolean last = (n == 1? true : false);
-                ThreadCavallo cavallo = new ThreadCavallo(rL, horseName, last);
+                ThreadCavallo cavallo = new ThreadCavallo(rL, horseName, ms, last);
                 cavalli.add(cavallo);
                 System.out.println(horseName + " partecipa alla gara \n");
                 n--;
             }
             Corsa corsa_cavalli = new Corsa(rL, cavalli);
             corsa_cavalli.startCorsa();
-            
-           
         }
-        
     }    
 }
