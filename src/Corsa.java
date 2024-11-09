@@ -1,10 +1,13 @@
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Corsa
 {
     private int roadLength;
     private ArrayList<ThreadCavallo> cavalli;
-
+    private ArrayList<String> ranking = new ArrayList<>();
+    
     public Corsa(int rL, ArrayList<ThreadCavallo> c)
     {
         roadLength = rL;
@@ -14,6 +17,11 @@ public class Corsa
     public int getRoadLength()
     {
         return roadLength;
+    }
+
+    public ArrayList<String> getRanking()
+    {
+        return ranking;
     }
 
     public ArrayList<ThreadCavallo> getCavalli()
@@ -37,7 +45,33 @@ public class Corsa
             {
                 thread.join();
             }
-            System.out.println("La gara è terminata");
         } catch(Exception e){}
+        System.out.println("La gara è terminata");
+        System.out.println("La classifica è \n" + "Al primo posto " + ranking.get(0) + "\n" + "Al secondo posto " + ranking.get(1) + "\n" + "Al terzo posto " + ranking.get(2));
+        
+        String filename;
+        try(Scanner input = new Scanner(System.in))
+        {
+            System.out.println("inserire il nome del file dove salvare le modifiche");
+            filename = input.nextLine();
+        }
+        try
+        {
+            Writelines cp = new Writelines(filename + ".txt", getRanking());
+        }
+        catch(IOException ex)
+        {
+            System.out.println("Errore di I/O.");
+            System.exit(1);
+        }
+    }
+
+    public void generateRanking(String horse)
+    {
+        ranking.add(horse);
+        /* 
+        array MUST have be at least 3 full positions when printing in file, fill empty positions if a horse gets injured
+        or remove as much positions as horses injured when printing rankings in the file @ (Writelines row 9)
+        */ 
     }
 }

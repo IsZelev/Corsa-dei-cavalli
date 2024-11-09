@@ -4,13 +4,15 @@ public class ThreadCavallo implements Runnable
     private boolean last;
     private int speed;
     private int roadLength;
+    private Corsa race;
 
-    public ThreadCavallo(int rl, String n, int ms, boolean l)
+    public ThreadCavallo(Corsa raceName, int rl, String n, int ms, boolean l)
     {
         roadLength = rl;
         name = n;
         speed = ms;
         last = l;
+        race = raceName;
     }
 
     public String getName()
@@ -34,6 +36,7 @@ public class ThreadCavallo implements Runnable
         boolean injured = false;
         int chance = 61;
         int accidentPercent = chance - (speed * 2);
+        int accidentPosition = 0;
         for(int i = 0; i <= this.roadLength; i+=speed)
         {
             System.out.println(this.getName() + " ha percorso " + i + " metri");
@@ -44,11 +47,11 @@ public class ThreadCavallo implements Runnable
             
             int position = (int)(Math.random() * accidentPercent); //random int from 0 to 10, chance for an accident to occur
             int obstacle = (int) (Math.random() * accidentPercent); //sudden obstacle on the field
-            
             if(obstacle == position) //if the obstacle is the same value as the horse's position, the horse gets injured and exits the race
             {
                 System.out.println(this.getName() + " si è infortunato e deve uscire dalla gara");
                 injured = true;
+                accidentPosition = i;
                 break;
             }
         }
@@ -56,6 +59,7 @@ public class ThreadCavallo implements Runnable
         if(!injured)
         {
             System.out.println("Il cavallo " + this.getName() + " è arrivato");
+            race.generateRanking(this.getName());
         }
     }
 }

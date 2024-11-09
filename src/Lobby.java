@@ -12,6 +12,8 @@ public class Lobby
             System.out.println("Inserire la lunghezza del percorso");
             int rL = input.nextInt();
             
+            Corsa corsa_cavalli = new Corsa(rL, cavalli);
+            
             System.out.println("La lunghezza del percorso è " + rL + " metri");
             input.nextLine();
 
@@ -35,12 +37,11 @@ public class Lobby
                     input.nextLine();
 
                 boolean last = (n == 1? true : false);
-                ThreadCavallo cavallo = new ThreadCavallo(rL, horseName, ms, last);
+                ThreadCavallo cavallo = new ThreadCavallo(corsa_cavalli, rL, horseName, ms, last);
                 cavalli.add(cavallo);
                 System.out.println(horseName + " partecipa alla gara \n");
                 n--;
             }
-            Corsa corsa_cavalli = new Corsa(rL, cavalli);
             corsa_cavalli.startCorsa();
         }
     }    
