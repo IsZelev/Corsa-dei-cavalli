@@ -23,9 +23,16 @@ public class Lobby
             {
                 System.out.println("Inserire il nome del cavallo ");
                 String horseName = input.nextLine();
-                System.out.println("Inserire la velocità del cavallo in metri al secondo");
-                int ms = input.nextInt();
-                input.nextLine();
+
+                    System.out.println("Inserire la velocità del cavallo (1 m/s - 25 m/s), ATTENZIONE: una velocità più alta aumenta la percentuale di rischio agli infortuni");
+                    int ms = input.nextInt();
+                    while(ms > 25)
+                    {
+                        System.out.println("Velocità troppo alta per un cavallo");
+                        System.out.println("Inserire la velocità del cavallo (1 m/s - 25 m/s), ATTENZIONE: una velocità più alta aumenta la percentuale di rischio agli infortuni");
+                        ms = input.nextInt();
+                    }
+                    input.nextLine();
 
                 boolean last = (n == 1? true : false);
                 ThreadCavallo cavallo = new ThreadCavallo(rL, horseName, ms, last);
